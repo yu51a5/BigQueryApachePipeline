@@ -1,6 +1,11 @@
-# Authentication: create a service account, generate a key in JSON format 
-# Next save its contents (everything except opening `{` and closing `}`) as google_key secret.
+# Environment variable google_sa_key is used for authentication, it's mandatory
+# Its contents is a service account key JSON format (everything except opening `{` and closing `}`)
 # how-to: https://medium.com/@yu51a5/bigquery-programmatic-access-hello-stack-overflow-data-in-bigquery-world-query-5d0806e146a9
+
+# Environment variable google_temp_bucket is used by Apache Pipeline only, it's optional
+# The format of its contents should be gs://bucket_name/path_to_temp_dir
+# It's needed for data writing (unless you are happy with STREAMING_INSERTS) and for reading (Apache Pipeline only)
+# If it's supplied, its
 
 # packages: run
 # pip install apache-beam[gcp]
@@ -56,6 +61,7 @@ run_a_posts_pipeline(project_id=credentials.project_id, filename='Posts.xml', wt
 run_a_simple_pipeline(project_id=credentials.project_id, wtbq_dict=wtbq_dict)
 
 ########################################################################################
+
 run_an_order_pipeline(project_id=credentials.project_id, wtbq_dict=wtbq_dict)
 
 ########################################################################################
